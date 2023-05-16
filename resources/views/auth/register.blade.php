@@ -24,14 +24,31 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <label for="puesto_id" class="col-md-4 col-form-label text-md-end">{{ __('Puesto') }}</label>
+                            <div class="col-md-6">
+                                <select id="puesto_id" class="form-control @error('puesto_id') is-invalid @enderror" name="puesto_id" required>
+                                    <option value="">{{ __('Seleccione un puesto') }}</option>
+                                    @foreach($puestos as $puesto)
+                                        <option value="{{ $puesto->id }}" {{old('puesto_id')}}>{{ $puesto->nombre_puesto }}</option>
+                                    @endforeach
+                                </select>
+                                @error('puesto_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                            <label for="username" class="col-md-4 col-form-label text-md-end">{{ __('Nombre de usuario') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username">
 
-                                @error('email')
+                                @error('username')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -64,7 +81,7 @@
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('Registrarse') }}
                                 </button>
                             </div>
                         </div>

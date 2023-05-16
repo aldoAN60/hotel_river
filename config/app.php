@@ -70,7 +70,21 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/Mexico_City',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Date Format
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify the default date format that should be used by your
+    | application. The PHP date formatting functions are used to create these
+    | strings. The default format is Y-m-d H:i:s.
+    |
+    */
+
+    'date_format' => 'H:i d-m-Y',
+
 
     /*
     |--------------------------------------------------------------------------

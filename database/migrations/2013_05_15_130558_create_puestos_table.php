@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('puestos', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->foreignId('puesto_id')->constrained(
-                table: 'puestos', indexName: 'puesto_id'
-            )->default(0);
-            $table->string('username')->unique();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('nombre_puesto')->unique();
+            $table->string('tipo_puesto')->default('OPERATIVO');
+            $table->integer('plantilla_maxima');
+            $table->integer('plantilla_actual');
+            $table->integer('nivel_acceso')->default(1);
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('puestos');
     }
 };
