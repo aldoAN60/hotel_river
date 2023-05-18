@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('puesto_id')->constrained(
                 table: 'puestos', indexName: 'puesto_id'
             )->default(0);
+            $table->string('email')->unique();
             $table->string('username')->unique();
             $table->string('password');
             $table->rememberToken();
