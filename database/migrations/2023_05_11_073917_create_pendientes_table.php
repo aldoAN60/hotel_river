@@ -20,7 +20,9 @@ return new class extends Migration
             );
             $table->string('pendiente');
             $table->string('prioridad');
-            $table->integer('departamento');
+            $table->foreignId('departamento_id')->constrained(
+                table: 'departamentos', indexName: 'departamento_id'
+            );
             $table->string('status')->default('PENDIENTE');
 
             $table->timestamps();

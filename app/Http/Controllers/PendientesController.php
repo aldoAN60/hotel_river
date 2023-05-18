@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\departamento;
 use App\Models\pendiente;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 
 class PendientesController extends Controller
 {
@@ -12,17 +14,20 @@ class PendientesController extends Controller
         $datos = new pendiente;
         $datos->turno = $request->input('turno');
         $datos->user_id = auth()->user()->id;
-        $datos->pendiente = $request->input('pendiente');
+        
         $datos->prioridad = $request->input('prioridad');
-        $datos->departamento = $request->input('departamento');
+        $datos->departamento_id = $request->input('departamento');
+        $datos->pendiente = $request->input('pendiente');
         $datos->save();
 
         return back();
     }
     public function mostrar_pendientes(){
-    $pendientes = pendiente::orderBy('created_at','desc')->paginate(4);
 
-    return view('pendientes', compact('pendientes'));
+    $confirmacion_pendientes = pendiente::all();
+    $pendientes = DB::table('vista_pendientes')->orderByDesc('fecha_de_creacion')->paginate(4);
+    $departamentos = departamento::all();
+    return view('pendientes', compact('pendientes','departamentos', 'confirmacion_pendientes'));
     }
 
     public function actualizar_pendiente($id){

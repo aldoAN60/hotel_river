@@ -41,10 +41,10 @@
                 <div class="col-sm-3 cont-input">
                     <label class="label" for="departamento">Departamento</label>
                     <select class="select input" name="departamento" id="departamento">
-                        <option value="">departamento</option>
-                        <option value="1">trabajo</option>
-                        <option value="2">hogar</option>
-                        <option value="3">personal</option>
+                        <option value="">Elige un departamento</option>
+                        @foreach ($departamentos as $departamento)
+                            <option value="{{$departamento->id}}">{{$departamento->nombre}}</option>                        
+                        @endforeach
                     </select>        
                 </div>
             

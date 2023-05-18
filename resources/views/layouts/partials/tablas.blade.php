@@ -14,15 +14,15 @@
         @foreach ($pendientes as $pendiente)
         <tr id="{{ $pendiente->id }}" >
             <th scope="row">{{$pendiente->turno}}</th>
-            <td>{{$pendiente->user_id}}</td>
+            <td>{{$pendiente->usuario}}</td>
             <td>{{$pendiente->pendiente}}</td>
             <td>{{$pendiente->prioridad}}</td>
-            <td>{{$pendiente->departamento}}</td>
-            <td>{{$pendiente->created_at->format('H:i d-m-Y')}}</td>
+            <td>{{$pendiente->departamento_encargado}}</td>
+            <td>{{$pendiente->fecha_de_creacion}}</td>
             <td>
                 <div class="cont-form">
-                    @if ($pendiente->status === 'PENDIENTE')
-                    <form  class="form" action="{{route('pendientes.confirmar',$pendiente)}}" method="post" data-id="{{ $pendiente->id }}" id="confirmar-pendiente" >
+                    @if ($pendiente->estatus === 'PENDIENTE')
+                    <form  class="form" action="{{route('pendientes.confirmar',$pendiente->id)}}" method="post" data-id="{{ $pendiente->id }}" id="confirmar-pendiente" >
                         @csrf
                         @method('patch')
                         <button class="btn btn-success" id="btn-confirmar">
@@ -32,7 +32,7 @@
                             </svg>
                         </button>
                     </form>
-                    <form class="form" action="{{route('pendientes.destroy',$pendiente)}}" method="post" data-id="{{ $pendiente->id }}" id="eliminar-pendiente">
+                    <form class="form" action="{{route('pendientes.destroy',$pendiente->id)}}" method="post" data-id="{{ $pendiente->id }}" id="eliminar-pendiente">
                         @csrf
                         @method('delete')
                         <button class="btn btn-danger" id="btn-eliminar">

@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('departamentos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained(
-                table: 'users', indexName: 'id_encargado'
-            );
+                table: 'users', indexName: 'encargado_id'
+            )->default(0);
             $table->string('nombre')->unique();
             $table->integer('numero_empleados');
             
