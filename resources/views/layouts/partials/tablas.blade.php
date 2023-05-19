@@ -55,10 +55,14 @@
         @endforeach
         </tbody>
     </table>
+    {{-- <div class="cont-paginacion">{{$pendientes->links('vendor.pagination.bootstrap-5')}}</div>
+     --}}
     @if (request()->url() !== "http://127.0.0.1:8000/pendientes")
         
-    <div class="cont-paginacion">{{$pendientes->appends(['id_buscar' => $busqueda])->links('vendor.pagination.bootstrap-5')}}</div>
-        
+    <div class="cont-paginacion">
+        {{ $pendientes->appends(request()->except('page'))->links('vendor.pagination.bootstrap-5') }}
+    </div>
+    
     @else
         
     <div class="cont-paginacion">{{$pendientes->links('vendor.pagination.bootstrap-5')}}</div>

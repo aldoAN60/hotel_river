@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', '/inicio')->name('inicio');
 
-Route::view('/pendientes', '/pendientes')->name('pendientes');
+// Route::view('/pendientes', '/pendientes')->name('pendientes');
 // Route::post('/guardar',[HomeController::class,'create'])->name('guardar');
 // Route::get('/register_show',[RegisterController::class,'show'])->name('register.show');
 
