@@ -7,11 +7,10 @@
 @endsection
 @section('content')
 <header class="text-center">
-    <h1 class="pendiente">agrega los pendientes de tu turno</h1>
+    <h1 class="pendiente">Agrega los pendientes de tu turno</h1>
 </header>
 <main class="container text-center">
     <div>
-
         <form id="formulario-pendiente" class="form" method="POST" action="{{route('pendientes.guardar')}}" >
             @csrf
             <div class="row">
@@ -60,6 +59,9 @@
         
         <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
             busqueda avanzada
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+              </svg>
         </a>
         <div class="collapse" id="collapseExample">
             <div class="card card-body">
@@ -110,8 +112,10 @@
                             </select>
                         </div>
                     </div>
-                    <button  class="btn btn-success" >Buscar pendiente</button>
-                    <a role="button" class="btn btn-primary" href="{{route('pendientes.mostrar')}}">eliminar filtros</a>
+                    <section class="cont-btn">
+                        <button  class="btn btn-success" >Buscar pendiente</button>
+                        <a role="button" class="btn btn-primary" href="{{route('pendientes.mostrar')}}">eliminar filtros</a>    
+                    </section>
                 </div>
             </div>
         </div>

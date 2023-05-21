@@ -5,13 +5,18 @@
     --color-back-input-clear: #e8e8e8;
     --color-outline-input-clear: #cfcfcf;
     --color-parrafos-clear: #b57f7f;
-    --color-pendiente-clear: #825b5b;
+    --color-titulos-clear: #825b5b;
+    
 }
+.row{
+    width: 100% !important;    
+}
+
 body {
     
 }
-    .pendiente {
-        color: var(--color-pendiente-clear);
+    .titulos {
+        color: var(--color-titulos-clear);
         font-weight: bold;
     }
     .parrafos {
@@ -65,7 +70,9 @@ body {
         margin-left: 5%;
     }
     
-  
+  .cont-btn{
+    margin-top: 3%;
+  }
   
   
 
@@ -75,7 +82,7 @@ body {
     }
 
 @media (max-width: 768px) {
-    .pendiente {
+    .titulos {
         margin-top: 2%;
     }
     .form-btn {
