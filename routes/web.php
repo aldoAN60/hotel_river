@@ -26,7 +26,8 @@ Route::patch('/pendientes-confirmar/{id}', [PendientesController::class,'actuali
 Route::delete('/pendientes-eliminar/{pendiente}', [PendientesController::class,'eliminar_pendiente'])->name('pendientes.destroy');
 
 
-Route::get('/seguimiento-facturas',[facturasController::class,'mostrar_facturas'])->name('facturas.mostrar');
+Route::get('/seguimiento-facturas',[facturasController::class,'index'])->name('facturas.index');
+Route::post('/guardar_facturas',[facturasController::class,'create'])->name('facturas.create');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

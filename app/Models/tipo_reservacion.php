@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class tipo_reservacion extends Model
 {
+    protected $table = 'tipo_reservacion';
     use HasFactory;
 }

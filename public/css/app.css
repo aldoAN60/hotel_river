@@ -8,13 +8,21 @@
     --color-titulos-clear: #825b5b;
     
 }
-.row{
+.row{ /* variable de boostrap no puede modficarla directamente en sass :(*/
     width: 100% !important;    
 }
-
-body {
-    
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+
+
     .titulos {
         color: var(--color-titulos-clear);
         font-weight: bold;
