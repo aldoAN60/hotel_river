@@ -22,7 +22,7 @@ class facturasController extends Controller
 
         $this->metodo_pago = metodo_pago::all();
         $this->tipo_reservacion = tipo_reservacion::all();
-        $this->vista_facturas = vista_factura::all();
+        $this->vista_facturas = vista_factura::orderBy('fecha_creacion','desc')->paginate(4);
         // $this->usuario_id = auth()->user()->id;
         // $this->usuario_nombre = auth()->user()->name;
     }
@@ -43,22 +43,29 @@ class facturasController extends Controller
         $datos->nombre = $request->input('nombre');
         $datos->telefono = $request->input('telefono');
         $datos->RFC = $request->input('RFC') ?? 'XAXX010101123';
-        $datos->razon_social = $request->input('razon_social') ?? 'PUBLIC EN GENERAL';
+        $datos->razon_social = $request->input('razon_social') ?? 'PUBLICO EN GENERAL';
         $datos->numero_noches = $request->input('numero_noches') ?? 1;
         $datos->id_tipo_reservacion = $request->input('tipo_reservacion');        
         $datos->id_metodo_pago = $request->input('metodo_pago');
         $datos->ult_4_digitos = $request->input('ult_4_digitos') ?? 'NA';
         $datos->tarifa = $request->input('tarifa');
         $datos->tarifa_sin_imp = $request->input('tarifa_sin_imp');
-        $datos->status = $request->input('status') ?? 'NO FACTURA';
+        $datos->status = $request->input('status') ?? 'PENDIENTE';
         $datos->id_usuario_captura = $request->input('id_usuario_captura');
         $datos->id_usuario_timbra = $request->input('id_usuario_timbra');
-        $datos->folio_factura = $request->input('folio_factura') ?? 'NA';
         $datos->correo = $request->input('correo') ?? 'SIN CORREO';
         $datos->save();
-        return $this->index();
-        
-        
-        
+        return redirect()->route('facturas.index');
     }
+    public function update($id){
+        $factura = seguimiento_factura::find($id);
+        $factura->status = 'FACTURADO';
+        $factura->save();
+        return back();
+    }
+    public function destroy(seguimiento_factura $factura){
+        $factura->delete();
+        return redirect()->back();
+    }
+    
 }

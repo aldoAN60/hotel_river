@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const switchInput = document.getElementById('switch_factura');
     const RFC = document.getElementById('RFC');
     const razon_social = document.getElementById('razon_social');
-    const folio = document.getElementById('folio_factura');
-    const estatus = document.getElementById("estatus");
+    const status_mostrar = document.getElementById("status_mostrar");
+    const status = document.getElementById("status");
     const metodo_pago = document.getElementById("metodo_pago");
     const tarifa = document.getElementById('tarifa');
     const tarifa_sin_imp_mostrar = document.getElementById('tarifa_sin_imp_mostrar');
@@ -15,21 +15,18 @@ document.addEventListener('DOMContentLoaded', function() {
             // Acción cuando el switch está activado
             RFC.disabled = false;
             razon_social.disabled = false;
-            folio.disabled = false;
-            estatus.disabled = false;
             RFC.placeholder = "RFC";
             razon_social.placeholder = "RAZON SOCIAL";
-            folio.placeholder = "folio";  
+            status_mostrar.placeholder = "PENDIENTE";
+            
         } else {
             // Acción cuando el switch está desactivado
             RFC.disabled = true;
             razon_social.disabled = true;
-            folio.disabled = true;
-            estatus.disabled = true;
-            estatus.value = "NO FACTURA";
+            status.value ="NO FACTURA"; 
+            status_mostrar.placeholder = "NO FACTURA";
             RFC.placeholder = "XAXX010101123";
             razon_social.placeholder = "PUBLICO EN GENERAL"; 
-            folio.placeholder = "folio";    
         }
     });
 

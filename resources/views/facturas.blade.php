@@ -89,25 +89,21 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="tarifa">Tarifa:</label>
-                        <input type="number" class="form-control" name="tarifa" id="tarifa" placeholder="Tarifa">
+                        <input type="number" step="0.01" class="form-control" name="tarifa" id="tarifa" placeholder="Tarifa">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="tarifa_sin_imp">Tarifa sin impuestos:</label>
                         <input type="number" class="form-control" name="tarifa_sin_imp_mostrar" id="tarifa_sin_imp_mostrar" placeholder="Tarifa sin impuestos" disabled >
-                        <input type="hidden" class="form-control" name="tarifa_sin_imp" id="tarifa_sin_imp">
+                        <input type="hidden" name="tarifa_sin_imp" id="tarifa_sin_imp">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="status">Status:</label>
-                        <select class="form-select" name="status" id="estatus">
-                            <option selected>Estatus</option>
-                            <option value="PENDIENTE">Pendiente</option>
-                            <option value="FACTURADO">Facturado</option>
-                            <option value="NO FACTURA">No factura</option>
-                        </select>
+                        <input type="text" class="form-control" name="status_mostrar" id="status_mostrar" placeholder="PENDIENTE" disabled>
+                        <input type="hidden" name="status" id="status">
                     </div>
                 </div>
             </div>
@@ -117,24 +113,13 @@
                     <div class="form-group">
                         <label for="id_usuario_captura">Usuario que captura:</label>
                         <input type="input"  class="form-control" value="{{$usuario_nombre}}" disabled>
-                        <input type="hidden"  class="form-control" value="{{$usuario_id}}" name="id_usuario_captura" id="id_usuario_captura">
-                    
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="id_usuario_timbra">Usuario que timbra:</label>
-                        <input type="input"  class="form-control" value="{{$usuario_nombre}}" disabled>
+                        <input type="hidden"  class="form-control" value="{{$usuario_id}}" name="id_usuario_captura" id="id_usuario_captura"> 
+                        <!-- se mantiene en hidden el usuario que timbra ya que no se puede dejar vacio el 
+                            campo en la base de datos, se actualizara el usuario que timbra cuando se 
+                            ingrese el folio, ademas se mantiene una coherencia en caso de que no se facture
+                        -->
                         <input type="hidden"  class="form-control" value="{{$usuario_id}}" name="id_usuario_timbra" id="id_usuario_timbra">
                     
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="folio_factura">Folio:</label>
-                        <input type="number" class="form-control" name="folio_factura" id="folio_factura" placeholder="Folio">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -153,5 +138,11 @@
 <section class="table-responsive">
     @include('layouts.partials.tabla-facturas')
 </section>
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
 
     @endsection
