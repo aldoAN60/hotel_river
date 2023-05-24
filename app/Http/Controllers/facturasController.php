@@ -50,17 +50,18 @@ class facturasController extends Controller
         $datos->ult_4_digitos = $request->input('ult_4_digitos') ?? 'NA';
         $datos->tarifa = $request->input('tarifa');
         $datos->tarifa_sin_imp = $request->input('tarifa_sin_imp');
-        $datos->status = $request->input('status') ?? 'PENDIENTE';
+        $datos->status = $request->input('status') ?? 'NO FACTURA';
         $datos->id_usuario_captura = $request->input('id_usuario_captura');
         $datos->id_usuario_timbra = $request->input('id_usuario_timbra');
         $datos->correo = $request->input('correo') ?? 'SIN CORREO';
         $datos->save();
         return redirect()->route('facturas.index');
     }
-    
+
     public function update($id, Request $request){
         $factura = seguimiento_factura::find($id);
         $factura->folio_factura = $request->input('folio_act');
+        $factura->id_usuario_captura = auth()->user()->id;
         $factura->status = 'FACTURADO';
         $factura->save();
         return back();

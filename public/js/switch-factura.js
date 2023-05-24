@@ -1,7 +1,10 @@
 
-document.addEventListener('DOMContentLoaded', function() {
+//funcion que permite que todo el contenido javascript se cargue despues que el contenido HTML y que el back-end
+document.addEventListener('DOMContentLoaded', function() { 
     const switchInput = document.getElementById('switch_factura');
     const RFC = document.getElementById('RFC');
+    const RFC_mostrar = document.getElementById('RFC_mostrar');
+    const razon_social_mostrar = document.getElementById('razon_social_mostrar');
     const razon_social = document.getElementById('razon_social');
     const status_mostrar = document.getElementById("status_mostrar");
     const status = document.getElementById("status");
@@ -13,20 +16,28 @@ document.addEventListener('DOMContentLoaded', function() {
     switchInput.addEventListener('change', function() {
         if (this.checked) {
             // Acción cuando el switch está activado
-            RFC.disabled = false;
-            razon_social.disabled = false;
-            RFC.placeholder = "RFC";
-            razon_social.placeholder = "RAZON SOCIAL";
+            
+            // valores asignados al input hidden 
+            RFC.value = "CSF PENDIENTE";
+            razon_social.value = "CSF PENDIENTE";
+            status.value = "PENDIENTE";
+            // "valores" que muestra el input pero que no afectan a la insercion de la BD
+            RFC_mostrar.placeholder = "CSF PENDIENTE";
+            razon_social_mostrar.placeholder = "CSF PENDIENTE";
             status_mostrar.placeholder = "PENDIENTE";
+
             
         } else {
             // Acción cuando el switch está desactivado
-            RFC.disabled = true;
-            razon_social.disabled = true;
+
+            // valores asignados al input hidden 
+            RFC.value = "XAXX010101123";
+            razon_social.value = "PUBLICO EN GENERAL";
             status.value ="NO FACTURA"; 
+            // "valores" que muestra el input pero que no afectan a la insercion de la BD
             status_mostrar.placeholder = "NO FACTURA";
-            RFC.placeholder = "XAXX010101123";
-            razon_social.placeholder = "PUBLICO EN GENERAL"; 
+            RFC_mostrar.placeholder = "XAXX010101123";
+            razon_social_mostrar.placeholder = "PUBLICO EN GENERAL"; 
         }
     });
 

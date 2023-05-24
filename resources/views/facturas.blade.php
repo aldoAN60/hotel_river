@@ -13,7 +13,7 @@
         <div class="d-flex align-items-end flex-column me-5">
             <label for="telefono" class="form-label ">¿Facturacion?</label>
             <div class="form-check form-switch me-3">
-                <input class="form-check-input" type="checkbox" role="switch" id="switch_factura" checked>
+                <input class="form-check-input" type="checkbox" role="switch" id="switch_factura">
             </div>
         </div>
         <div class="container">
@@ -58,13 +58,16 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="RFC">RFC:</label>
-                        <input type="text" class="form-control" name="RFC" id="RFC" placeholder="RFC">
+                        <input type="text" class="form-control" name="RFC_mostrar" id="RFC_mostrar" placeholder="XAXX010101123" disabled>
+                        <input type="hidden" name="RFC" id="RFC" placeholder="RFC">
+                    
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="razon_social">Razón social:</label>
-                        <input type="text" class="form-control" name="razon_social" id="razon_social" placeholder="Razón social">
+                        <input type="text" class="form-control" name="razon_social_mostrar" id="razon_social_mostrar" placeholder="PUBLICO EN GENERAL" disabled>
+                        <input type="hidden" name="razon_social" id="razon_social">
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -102,7 +105,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="status">Status:</label>
-                        <input type="text" class="form-control" name="status_mostrar" id="status_mostrar" placeholder="PENDIENTE" disabled>
+                        <input type="text" class="form-control" name="status_mostrar" id="status_mostrar" placeholder="NO FACTURA" disabled>
                         <input type="hidden" name="status" id="status">
                     </div>
                 </div>

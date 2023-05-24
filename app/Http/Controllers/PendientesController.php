@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class PendientesController extends Controller
 {
+    
 
     
     public function guardar_pendiente(Request $request){

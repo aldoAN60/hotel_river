@@ -18,6 +18,7 @@
                             <br>
                             <a class="btn btn-success" href="{{route('inicio')}}">Regresar al inicio</a>
                             <a class="btn btn-success" href="{{route('pendientes.mostrar')}}">Ir a pendientes</a>
+                            <a class="btn btn-success" href="{{route('facturas.index')}}">Ir a seguimiento de facturas</a>
                             
                         </h3>
                     
