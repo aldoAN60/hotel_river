@@ -30,6 +30,7 @@ Route::delete('/pendientes-eliminar/{pendiente}', [PendientesController::class,'
 Route::get('/seguimiento-factura',[facturasController::class,'index'])->name('facturas.index');
 Route::post('/guardar_factura',[facturasController::class,'create'])->name('facturas.create');
 Route::patch('/actualizar_factura/{id}',[facturasController::class,'update'])->name('facturas.update');
+
 route::delete('/eliminar_factura/{factura}',[facturasController::class,'destroy'])->name('facturas.destroy');
 Auth::routes();
 

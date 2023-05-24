@@ -135,14 +135,10 @@
         </div>
     </form>
 </main>
-<section class="table-responsive">
+<section class=" container-fluid table-responsive">
     @include('layouts.partials.tabla-facturas')
 </section>
-@if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
+
 
 
     @endsection

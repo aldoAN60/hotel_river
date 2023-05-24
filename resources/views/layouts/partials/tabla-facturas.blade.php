@@ -39,18 +39,23 @@
             <td>{{$factura->usuario_timbra}}</td>
             <td>
             @if ($factura->status === "PENDIENTE")
-            <div class="d-flex justify-content-between">
-            <p class="mt-1">{{$factura->folio_factura}}</p>
-                <form action="" method="post" class="ms-3">
-                    @csrf
-                    @method('PATCH')
-                    <button class="btn btn-warning btn-sm" id="editar_folio">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
-                            <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
-                          </svg>
-                    </button>
-                </form>
-            </div>
+                <button type="button" class="btn btn-sm position-relative" data-bs-toggle="collapse" data-bs-target="#collapseExample{{$factura->id}}" aria-expanded="false" aria-controls="collapseExample">
+                    {{$factura->folio_factura}}
+                    <span class="position-absolute top-0 start-85 translate-middle p-2 bg-danger border border-light rounded-circle">
+                        <span class="visually-hidden">New alerts</span>
+                      </span>
+                </button>
+                <div class="collapse collapse-horizontal" id="collapseExample{{$factura->id}}">
+                    
+                        <form action="{{route('facturas.update', $factura->id)}}" method="post">
+                            @csrf
+                            @method('PATCH')
+                            <input type="text" name="folio_act" id="folio_act">
+                        </form>
+                    
+                  </div>
+
+            
             @else
             {{$factura->folio_factura}}
             @endif
@@ -60,16 +65,6 @@
             <td>
                 <div class="cont-form">
                     @if ($factura->status === 'PENDIENTE')
-                    <form  class="form" action="{{route('facturas.update',$factura->id)}}" method="post" data-id="{{ $factura->id }}" id="confirmar-factura" >
-                        @csrf
-                        @method('patch')
-                        <button class="btn btn-success" id="btn-confirmar">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16">
-                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
-                            </svg>
-                        </button>
-                    </form>
                     <form class="form" action="{{route('facturas.destroy', $factura->id)}}" method="post" data-id="{{ $factura->id }}" id="eliminar-factura">
                         @csrf
                         @method('delete')

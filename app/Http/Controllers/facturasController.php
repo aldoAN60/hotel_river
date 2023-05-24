@@ -57,11 +57,14 @@ class facturasController extends Controller
         $datos->save();
         return redirect()->route('facturas.index');
     }
-    public function update($id){
+    
+    public function update($id, Request $request){
         $factura = seguimiento_factura::find($id);
+        $factura->folio_factura = $request->input('folio_act');
         $factura->status = 'FACTURADO';
         $factura->save();
         return back();
+
     }
     public function destroy(seguimiento_factura $factura){
         $factura->delete();
