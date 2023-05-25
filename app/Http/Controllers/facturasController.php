@@ -60,8 +60,10 @@ class facturasController extends Controller
 
     public function update($id, Request $request){
         $factura = seguimiento_factura::find($id);
+        $factura->RFC = $request->input('RFC_act');
+        $factura->razon_social = $request->input('razon_social_act');
         $factura->folio_factura = $request->input('folio_act');
-        $factura->id_usuario_captura = auth()->user()->id;
+        $factura->id_usuario_timbra = $request->input('id_usuario_timbra');
         $factura->status = 'FACTURADO';
         $factura->save();
         return back();

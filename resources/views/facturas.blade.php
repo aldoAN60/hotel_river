@@ -2,6 +2,7 @@
 @section('title','facturas')
 @section('js')
 <script src="/js/switch-factura.js"></script>
+<script src="/js/jquery-factura.js"></script>
 @endsection
 @section('content')
 <header>
