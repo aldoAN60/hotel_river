@@ -17,12 +17,14 @@ class facturasController extends Controller
     protected $tipo_reservacion;
     protected $usuario_id;
     protected $usuario_nombre;
+    protected $usuarios;
     protected $vista_facturas;
     public function __construct(){
 
         $this->metodo_pago = metodo_pago::all();
         $this->tipo_reservacion = tipo_reservacion::all();
         $this->vista_facturas = vista_factura::orderBy('fecha_creacion','desc')->paginate(4);
+        $this->usuarios = User::all();
         // $this->usuario_id = auth()->user()->id;
         // $this->usuario_nombre = auth()->user()->name;
     }
@@ -35,6 +37,7 @@ class facturasController extends Controller
         'usuario_id' => $usuario_id,
         'usuario_nombre' => $usuario_nombre,
         'facturas' => $this->vista_facturas,
+        'usuarios' => $this->usuarios,
         ]);
     }
     public function create(Request $request){
@@ -72,6 +75,63 @@ class facturasController extends Controller
     public function destroy(seguimiento_factura $factura){
         $factura->delete();
         return redirect()->back();
+    }
+    public function busqueda_factura(Request $request){
+        $query = vista_factura::query();
+        if ($request->filled('habitacion')) {
+            $query->where('habitacion', $request->habitacion);
+        }
+    
+        if ($request->filled('huesped')) {
+            $query->where('huesped', $request->huesped);
+        }
+    
+        if ($request->filled('tipo_reservacion') && $request->tipo_reservacion !== 'Tipo') {
+            $query->where('nombre', $request->tipo_reservacion);
+        }
+    
+        if ($request->filled('RFC')) {
+            $query->where('RFC', $request->RFC);
+        }
+    
+        if ($request->filled('razon_social')) {
+            $query->where('razon_social', $request->razon_social);
+        }
+    
+        if ($request->filled('metodo_pago') && $request->metodo_pago !== 'Metodo de pago') {
+            $query->where('metodo', $request->metodo_pago);
+        }
+    
+        if ($request->filled('usuario_captura') && $request->usuario_captura !== 'usuario') {
+            $query->where('usuario_captura', $request->usuario_captura);
+        }
+    
+        if ($request->filled('usuario_timbra') && $request->usuario_timbra !== 'usuario') {
+            $query->where('usuario_timbra', $request->usuario_timbra);
+        }
+    
+        if ($request->filled('status') && $request->status !== 'Estatus') {
+            $query->where('status', $request->status);
+        }
+    
+        if ($request->filled('folio')) {
+            $query->where('folio_factura', $request->folio);
+        }
+        
+        
+        $facturas = $query->orderByDesc('fecha_creacion')->paginate(4);      
+
+        $usuario_id = auth()->user()->id;
+        $usuario_nombre = auth()->user()->name;
+        
+        return view('facturas', [
+            'metodos_pago' => $this->metodo_pago,
+        'tipo_reservaciones' => $this->tipo_reservacion,
+        'usuario_id' => $usuario_id,
+        'usuario_nombre' => $usuario_nombre,
+        'facturas' => $facturas,
+        'usuarios' => $this->usuarios,
+        ]); 
     }
     
 }

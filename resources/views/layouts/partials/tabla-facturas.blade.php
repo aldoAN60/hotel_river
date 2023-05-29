@@ -1,6 +1,6 @@
-<table class="table table-info table-hover align-middle caption-top">
+<table class="table  table-hover align-middle caption-top" id="tabla_facturas">
     <caption>Lista de seguimiento de facturas</caption>
-    <thead  class="table-primary">
+    <thead  class="table-secondary">
         <tr class="align-middle text-center">
             <th scope="col">Habitación</th>
             <th scope="col">Huésped</th>
@@ -21,9 +21,10 @@
             <th scope="col">Estatus/eliminar</th>
         </tr>
     </thead>
-    <tbody class="table-group-divider">
+    <tbody class="table-group-divider" >
         @foreach ($facturas as $factura)
-        <tr {{--class="table-warning"--}} class="text-center">
+        <tr class="{{$factura->status === "FACTURADO" ? "table-success" : ($factura->status === "NO FACTURA" ? "table-light" : "table-warning") }}
+            text-center">
             <td>{{$factura->habitacion}}</td>
             <td>{{$factura->huesped}}</td>
             <td>{{$factura->numero_noches}}</td>
@@ -40,7 +41,7 @@
             <td>{{$factura->folio_factura}}</td>
             <td>{{$factura->correo}}</td>
             <td>{{$factura->fecha_creacion}}</td>
-            <td>
+            <td >
                 <div class="cont-form d-flex justify-content-center">
                     @if ($factura->status === 'PENDIENTE')
                     @include('layouts.partials.modal-act-fac')

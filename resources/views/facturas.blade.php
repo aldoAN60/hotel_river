@@ -2,7 +2,6 @@
 @section('title','facturas')
 @section('js')
 <script src="/js/switch-factura.js"></script>
-<script src="/js/jquery-factura.js"></script>
 @endsection
 @section('content')
 <header>
@@ -139,10 +138,132 @@
         </div>
     </form>
 </main>
-<section class=" container-fluid table-responsive">
+<aside>
+    <form action="{{route('facturas.busqueda')}}" method="get">
+        @csrf
+        
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            busqueda avanzada
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg>
+        </a>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                <div class="container text-center">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label for="habitacion">Habitación:</label>
+                                <input type="number" class="form-control" name="habitacion" id="habitacion" placeholder="HAB">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="huesped">Huesped:</label>
+                                <input type="text" class="form-control" name="huesped" id="huesped" placeholder="huesped">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="tipo_reservacion">Tipo de reservación:</label>
+                                <select class="form-select" name="tipo_reservacion" id="tipo_reservacion">
+                                    <option selected>Tipo</option>
+                                    @foreach ($tipo_reservaciones as $reservacion)
+                                    <option value="{{$reservacion->nombre}}">{{$reservacion->nombre}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="RFC">RFC:</label>
+                                <input type="text" class="form-control" name="RFC" id="RFC" placeholder="RFC">
+                                
+                            
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="razon_social">Razón social:</label>
+                                <input type="text" class="form-control" name="razon_social" id="razon_social" placeholder="Razón social">
+                                
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="metodo_pago">Metodo de pago:</label>
+                                <select class="form-select" name="metodo_pago" id="metodo_pago">
+                                    <option selected>Metodo de pago</option>
+                                    @foreach ($metodos_pago as $metodo)
+                                    <option value="{{$metodo->username}}">{{$metodo->metodo}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="usuario_captura">Usuario que capturo:</label>
+                                <select class="form-select" name="usuario_captura" id="usuario_captura">
+                                    <option selected>usuario</option>
+                                    @foreach ($usuarios as $usuario)
+                                    <option value="{{$usuario->username}}">{{$usuario->username}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="usuario_timbra">Usuario que timbro:</label>
+                                <select class="form-select" name="usuario_timbra" id="usuario_timbra">
+                                    <option selected>usuario</option>
+                                    @foreach ($usuarios as $usuario)
+                                    <option value="{{$usuario->id}}">{{$usuario->username}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="status">Estatus:</label>
+                                <select class="form-select" name="status" id="status">
+                                    <option selected>Estatus</option>
+                                    <option value="FACTURADO">FACTURADO</option>
+                                    <option value="NO FACTURA">NO FACTURA</option>
+                                    <option value="PENDIENTE">PENDIENTE</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label for="folio">folio:</label>
+                                <input type="text" class="form-control" name="folio" id="folio" placeholder="folio">
+                            </div>
+                        </div>
+                        <section class="text text-center mt-2">
+                            <button  class="btn btn-success" >Buscar facturas</button>
+                            <a role="button" class="btn btn-primary" href="{{route('facturas.index')}}">eliminar filtros</a>    
+                            
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</aside>
+<section class="container-fluid table-responsive">
+    @if ($facturas->isEmpty())
+    <h1 class="text text-center">No hay facturas agregados aún</h1>    
+    
+    @else
+    
     @include('layouts.partials.tabla-facturas')
+
+    
+    @endif
 </section>
-
-
-
     @endsection
